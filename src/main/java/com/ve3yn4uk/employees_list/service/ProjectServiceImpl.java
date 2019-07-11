@@ -3,10 +3,12 @@ package com.ve3yn4uk.employees_list.service;
 import com.ve3yn4uk.employees_list.entity.Project;
 import com.ve3yn4uk.employees_list.repository.IProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProjectServiceImpl implements IProjectService {
 
     private IProjectRepository projectRepository;

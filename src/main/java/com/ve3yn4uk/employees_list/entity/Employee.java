@@ -2,6 +2,7 @@ package com.ve3yn4uk.employees_list.entity;
 
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employee")
@@ -18,16 +19,14 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "position")
+    @Column
     private String position;
 
-    @Column(name = "department")
+    @Column
     private String department;
 
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-//            CascadeType.REFRESH, CascadeType.DETACH})
-//    @JoinColumn(name = "project_id")
-//    private Project project;
+    @Column(name = "project_id")
+    private int projectId;
 
     public Employee() {
     }
@@ -79,13 +78,39 @@ public class Employee {
         this.department = department;
     }
 
-//    public Project getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(Project project) {
-//        this.project = project;
-//    }
+    public int getProjectId() {
+        return projectId;
+    }
 
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", position='" + position + '\'' +
+                ", department='" + department + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id &&
+                Objects.equals(firstName, employee.firstName) &&
+                Objects.equals(lastName, employee.lastName) &&
+                Objects.equals(position, employee.position) &&
+                Objects.equals(department, employee.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, position, department);
+    }
 }

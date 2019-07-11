@@ -48,4 +48,9 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public void deleteById(int theId) {
         employeeRepository.deleteById(theId);
     }
+
+    @Override
+    public List<Employee> findByProjectId(int theId) {
+        return employeeRepository.findByProjectId(theId);
+    }
 }

@@ -2,9 +2,7 @@ package com.ve3yn4uk.employees_list.entity;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "project")
@@ -19,20 +17,15 @@ public class Project {
     private String name;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    private String startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
-
-//    @OneToMany(mappedBy = "project",
-//            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-//                    CascadeType.REFRESH, CascadeType.DETACH})
-//    private List<Employee> employees;
+    private String endDate;
 
     public Project() {
     }
 
-    public Project(String name, LocalDate startDate, LocalDate endDate) {
+    public Project(String name, String startDate, String endDate) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -54,36 +47,46 @@ public class Project {
         this.name = name;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-//    public List<Employee> getEmployees() {
-//        return employees;
-//    }
-//
-//    public void setEmployees(List<Employee> employees) {
-//        this.employees = employees;
-//    }
 
-//    public void addEmployee(Employee tempEmployee){
-//
-//        if (employees == null){
-//            employees = new ArrayList<>();
-//        }
-//        employees.add(tempEmployee);
-//        tempEmployee.setProject(this);
-//    }
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return id == project.id &&
+                Objects.equals(name, project.name) &&
+                Objects.equals(startDate, project.startDate) &&
+                Objects.equals(endDate, project.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, startDate, endDate);
+    }
 }
